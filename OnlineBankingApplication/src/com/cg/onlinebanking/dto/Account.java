@@ -1,9 +1,23 @@
-package com.cg.onlinebanking.dto;
+package com.cg.onlinebanking.bean;
 
 public class Account {
 private int accountId;
 private String accounttype;
 private double accountbalance;
+private String userid;
+private int customerid;
+public String getUserid() {
+	return userid;
+}
+public void setUserid(String userid) {
+	this.userid = userid;
+}
+public int getCustomerid() {
+	return customerid;
+}
+public void setCustomerid(int customerid) {
+	this.customerid = customerid;
+}
 public int getAccountId() {
 	return accountId;
 }
