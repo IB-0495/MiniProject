@@ -6,6 +6,7 @@ import java.util.List;
 import com.cg.onlinebanking.dto.Account;
 import com.cg.onlinebanking.dto.Customer;
 import com.cg.onlinebanking.dto.Transactions;
+import com.cg.onlinebanking.dto.User;
 import com.cg.onlinebanking.exception.OnlineBankingException;
 
 public interface IOnlineBankingService {
@@ -20,5 +21,6 @@ public interface IOnlineBankingService {
 	public boolean transferFundDiffAcc(int from, int to)throws OnlineBankingException;
 	public boolean transferFundOwnAcc(int from, int to)throws OnlineBankingException;
 	public boolean changePassword(String pass)throws OnlineBankingException;
-
+	public int createNewAccountExistingCustomer(Account a, int customerId) throws OnlineBankingException;
+	public int createNewAccountNewCustomer(Account a, Customer c, User u) throws OnlineBankingException;
 }
