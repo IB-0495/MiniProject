@@ -5,9 +5,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import com.cg.onlinebanking.bean.Account;
-import com.cg.onlinebanking.bean.Customer;
-import com.cg.onlinebanking.bean.User;
+import com.cg.onlinebanking.dto.Account;
+import com.cg.onlinebanking.dto.Customer;
+import com.cg.onlinebanking.dto.User;
+import com.cg.onlinebanking.exception.OnlineBankingException;
+import com.cg.onlinebanking.service.IOnlineBankingService;
+import com.cg.onlinebanking.service.OnlineBankingServiceImpl;
 
 
 
@@ -16,6 +19,8 @@ public class OnlineBankingClient {
 	static Account account =new Account();
 	static User user=new User();
 	static Customer customer = new Customer();
+	IOnlineBankingService obs=new OnlineBankingServiceImpl();
+	
 	public static void main(String[] args) {
 		String username;
 		String pswd;
@@ -33,7 +38,7 @@ public class OnlineBankingClient {
         if(login==true)
         {
         	boolean user=true;//check if user is log in or admin is log into
-        	if(user==true)
+        	if(user==false)
         	{
         	    //user module	
         		do
@@ -148,6 +153,7 @@ public class OnlineBankingClient {
 						System.out.println("-------------------");
 						System.out.println("Enter your choice");
 						int option=sc.nextInt();
+						viewSwitchForAccount(option);
 						//call createNewAccount(Account a,Customer c)
 						break;
 					case 2:
@@ -208,12 +214,19 @@ public class OnlineBankingClient {
 	/*Function for nested switch case for create account*/
 	public static void viewSwitchForAccount(int option)
 	{
+		IOnlineBankingService obs=new OnlineBankingServiceImpl();
 		switch (option) {
 		case 1:
 			//new user
-			getCustomerData(customer);
-			getUserData(user);
-			getAccountDetails(account);
+			customer=getCustomerData(customer);
+			user=getUserData(user);
+			account=getAccountDetails(account);
+			try {
+				int id=obs.createNewAccountNewCustomer(account, customer, user);
+				System.out.println(id);
+			} catch (OnlineBankingException e) {
+				System.out.println(e.getMessage());
+			}
 			break;
 		case 2:
 			//check if it is valid/present
@@ -224,7 +237,15 @@ public class OnlineBankingClient {
 			boolean valid=true;//true ki jagah function call karna hai
 			if(valid==true)
 			{
-				getAccountDetails(account);
+				account=getAccountDetails(account);
+				try {
+					int id=obs.createNewAccountExistingCustomer(account, cid);
+					System.out.println(id);
+					
+				} catch (OnlineBankingException e) {
+					
+					System.out.println(e.getMessage());
+				}
 			}
 			else
 			{
@@ -262,6 +283,7 @@ public class OnlineBankingClient {
 		user.setSecretQuestion(sc.next());
 		System.out.println("Enter Transaction password");
 		user.setTransactionPassword(sc.next());
+		user.setLockStatus("U");
 		return user;
 		
 	}
@@ -272,7 +294,7 @@ public class OnlineBankingClient {
 		System.out.println("Enter Account Type");
 		account.setAccounttype(sc.next());
 		System.out.println("Enter Opening Balance");
-		account.setAccountbalance(sc.nextDouble());
+		account.setAccountbalance(sc.nextInt());
 		return account;
 		
 	}
