@@ -1,17 +1,11 @@
-package com.cg.onlinebanking.bean;
+package com.cg.onlinebanking.dto;
 
 public class Account {
 private int accountId;
 private String accounttype;
-private double accountbalance;
-private String userid;
+private int accountbalance;
 private int customerid;
-public String getUserid() {
-	return userid;
-}
-public void setUserid(String userid) {
-	this.userid = userid;
-}
+
 public int getCustomerid() {
 	return customerid;
 }
@@ -30,11 +24,11 @@ public String getAccounttype() {
 public void setAccounttype(String accounttype) {
 	this.accounttype = accounttype;
 }
-public double getAccountbalance() {
+public int getAccountbalance() {
 	return accountbalance;
 }
-public void setAccountbalance(double accountbalance) {
-	this.accountbalance = accountbalance;
+public void setAccountbalance(int d) {
+	this.accountbalance = d;
 }
 
 
