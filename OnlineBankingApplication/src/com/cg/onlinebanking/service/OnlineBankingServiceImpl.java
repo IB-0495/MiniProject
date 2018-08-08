@@ -3,13 +3,18 @@ package com.cg.onlinebanking.service;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.cg.onlinebanking.dao.IOnlineBankingDao;
+import com.cg.onlinebanking.dao.OnlineBankingDaoImpl;
 import com.cg.onlinebanking.dto.Account;
 import com.cg.onlinebanking.dto.Customer;
 import com.cg.onlinebanking.dto.Transactions;
+import com.cg.onlinebanking.dto.User;
 import com.cg.onlinebanking.exception.OnlineBankingException;
 
 public class OnlineBankingServiceImpl implements IOnlineBankingService {
 
+	IOnlineBankingDao obs=new OnlineBankingDaoImpl();
+	
 	@Override
 	public List<Transactions> viewMiniStatement()throws OnlineBankingException {
 		// TODO Auto-generated method stub
@@ -30,7 +35,7 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService {
 
 	@Override
 	public int createNewAccount(Account a, Customer c)throws OnlineBankingException {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
@@ -68,6 +73,18 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService {
 	public boolean changePassword(String pass)throws OnlineBankingException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public int createNewAccountExistingCustomer(Account a, int customerId) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return obs.createNewAccountExistingCustomer(a, customerId);
+	}
+
+	@Override
+	public int createNewAccountNewCustomer(Account a, Customer c, User u) throws OnlineBankingException {
+		// TODO Auto-generated method stub
+		return obs.createNewAccountNewCustomer(a, c, u);
 	}
 
 	
