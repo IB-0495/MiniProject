@@ -1,4 +1,4 @@
-package com.cg.onlinebanking.bean;
+package com.cg.onlinebanking.dto;
 
 public class User 
 {
@@ -7,6 +7,13 @@ public class User
    private String secretQuestion;
    private String transactionPassword;
    private String lockStatus;
+   private int customerId;
+public int getCustomerId() {
+	return customerId;
+}
+public void setCustomerId(int customerId) {
+	this.customerId = customerId;
+}
 public String getUserId() {
 	return userId;
 }
