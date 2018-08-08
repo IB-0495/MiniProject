@@ -190,7 +190,6 @@ public class OnlineBankingServiceImpl implements IOnlineBankingService {
 		else 
 	    return false;
 		}
-
 	
 
 }
