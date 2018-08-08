@@ -5,14 +5,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import com.cg.onlinebanking.bean.Account;
+import com.cg.onlinebanking.bean.Customer;
+import com.cg.onlinebanking.bean.User;
 
 
-public class Client {
 
+public class OnlineBankingClient {
+	static Scanner sc = new Scanner(System.in);
+	static Account account =new Account();
+	static User user=new User();
+	static Customer customer = new Customer();
 	public static void main(String[] args) {
 		String username;
 		String pswd;
-		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("Username : ");
 		username = sc.next();
 		System.out.println("Password : ");
@@ -134,7 +141,13 @@ public class Client {
         			choice= sc.nextInt();
         			switch (choice) {
 					case 1:
+						//Create Account
 						clearConsole();
+						System.out.println("1. New User");
+						System.out.println("2. Existing User");
+						System.out.println("-------------------");
+						System.out.println("Enter your choice");
+						int option=sc.nextInt();
 						//call createNewAccount(Account a,Customer c)
 						break;
 					case 2:
@@ -154,7 +167,7 @@ public class Client {
         }
         else
         {
-        	System.out.println("Invalid credential...");
+        	System.out.println("ioInvalid credential...");
         }
 	}
 	
@@ -171,9 +184,6 @@ public class Client {
 	public static void viewStatementSwitch(int choice)
 	{
 		clearConsole();
-		@SuppressWarnings("resource")
-		Scanner sc= new Scanner(System.in);
-		
 		switch(choice)
 		{
 		case 1:
@@ -195,6 +205,76 @@ public class Client {
 		}
 	}
 	
-	//public sts
-
+	/*Function for nested switch case for create account*/
+	public static void viewSwitchForAccount(int option)
+	{
+		switch (option) {
+		case 1:
+			//new user
+			getCustomerData(customer);
+			getUserData(user);
+			getAccountDetails(account);
+			break;
+		case 2:
+			//check if it is valid/present
+			System.out.println("Enter Customer ID");
+			int cid=sc.nextInt();
+			/*call the function for validation of customer id it
+			will return true or false*/
+			boolean valid=true;//true ki jagah function call karna hai
+			if(valid==true)
+			{
+				getAccountDetails(account);
+			}
+			else
+			{
+				System.out.println("Customer Id "+cid+" do not exist");
+			}
+		default:
+			break;
+		}
+	}
+	
+	/*Function for getting customer details*/
+	public static Customer getCustomerData(Customer customer)
+	{
+		
+		System.out.println("Enter Customer Name");
+		customer.setCustomerName(sc.next());
+		System.out.println("Enter Email");
+		customer.setEmail(sc.next());
+		System.out.println("Enter Address");
+		customer.setAddress(sc.next());
+		System.out.println("Enter Pancard");
+		customer.setPanCard(sc.next());
+		return customer;
+		
+	}
+	
+	/*Function for getting user details*/
+	public static User getUserData(User user)
+	{
+		System.out.println("Enter User ID");
+		user.setUserId(sc.next());
+		System.out.println("Enter Password");
+		user.setPassword(sc.next());
+		System.out.println("Enter Secret Question");
+		user.setSecretQuestion(sc.next());
+		System.out.println("Enter Transaction password");
+		user.setTransactionPassword(sc.next());
+		return user;
+		
+	}
+	
+	/*function for getting account details*/
+	public static Account getAccountDetails(Account account)
+	{
+		System.out.println("Enter Account Type");
+		account.setAccounttype(sc.next());
+		System.out.println("Enter Opening Balance");
+		account.setAccountbalance(sc.nextDouble());
+		return account;
+		
+	}
+ 
 }
