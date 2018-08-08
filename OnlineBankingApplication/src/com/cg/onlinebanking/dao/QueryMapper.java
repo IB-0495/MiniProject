@@ -37,11 +37,9 @@ public class QueryMapper {
     		"         user_Id='?'";
     
     
-    public static final String new_acc_cust="insert into customer(customer_id,customer_name,phone_number,emailid,city,ad\r\n" + 
-    		"dress) values(?,'?',?,'?','?','')";
-    public static final String new_acc_accdet="insert into account_master(account_id,account_type,account_balance,open_dat\r\n" + 
-    		"e,accholder_name) values(?,'?',?,'?','?')";
-    
+    public static final String new_acc_cust="insert into customer(customer_id,customer_name,email,address,pancard,user_id) values(customerid_seq.nextval,?,?,?,?,?)";
+    public static final String new_acc_accdet="insert into account_master(account_id,account_type,account_balance,open_date,Customer_ID) values(accountid_seq.nextval,?,?,sysdate,?)";
+    public static final String new_acc_user="insert into user_table(user_id,login_password,secret_question,transaction_password,lock_status) values(?,?,?,?,?)";
     
     public static final String transdet_of_all="select * from Transactions";
     
@@ -55,4 +53,3 @@ public class QueryMapper {
 
 
 
-}
