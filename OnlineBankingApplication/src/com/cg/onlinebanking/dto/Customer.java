@@ -1,4 +1,4 @@
-package com.cg.onlinebanking.bean;
+package com.cg.onlinebanking.dto;
 
 public class Customer {
 private int customerid;
