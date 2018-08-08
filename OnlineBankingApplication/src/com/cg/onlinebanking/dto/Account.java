@@ -3,7 +3,7 @@ package com.cg.onlinebanking.dto;
 public class Account {
 private int accountId;
 private String accounttype;
-private int accountbalance;
+private String accountbalance;
 private int customerid;
 
 public int getCustomerid() {
@@ -24,10 +24,10 @@ public String getAccounttype() {
 public void setAccounttype(String accounttype) {
 	this.accounttype = accounttype;
 }
-public int getAccountbalance() {
+public String getAccountbalance() {
 	return accountbalance;
 }
-public void setAccountbalance(int d) {
+public void setAccountbalance(String d) {
 	this.accountbalance = d;
 }
 
