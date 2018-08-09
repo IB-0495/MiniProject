@@ -43,7 +43,7 @@ public class QueryMapper {
     
     public static final String transdet_of_all="select * from Transactions";
     
-    
+    public static final String login="select user_id,login_password from user_table where user_id=?";
 }
 
 
