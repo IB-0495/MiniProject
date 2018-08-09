@@ -23,4 +23,6 @@ public interface IOnlineBankingService {
 	public boolean changePassword(String pass)throws OnlineBankingException;
 	public int createNewAccountExistingCustomer(Account a, int customerId) throws OnlineBankingException;
 	public int createNewAccountNewCustomer(Account a, Customer c, User u) throws OnlineBankingException;
+	public String login(String userName,String password) throws OnlineBankingException;
+
 }
