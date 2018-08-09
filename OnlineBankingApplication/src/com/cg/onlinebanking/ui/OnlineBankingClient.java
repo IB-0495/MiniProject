@@ -19,26 +19,32 @@ public class OnlineBankingClient {
 	static Account account =new Account();
 	static User user=new User();
 	static Customer customer = new Customer();
+	public static IOnlineBankingService service = new OnlineBankingServiceImpl();
 	IOnlineBankingService obs=new OnlineBankingServiceImpl();
 	
 	public static void main(String[] args) {
 		String username;
 		String pswd;
-		
+		String login = null;
 		System.out.println("Username : ");
 		username = sc.next();
 		System.out.println("Password : ");
 		pswd = sc.next();
         clearConsole();
         System.out.println("Welcome "+username);
-        
+        try {
+			login=service.login(username, pswd);
+		} catch (OnlineBankingException e) {
+			System.out.println("Error");
+		}
         //call the login function 
-        boolean login=true;
+        
+        
         int choice=0;
-        if(login==true)
+        if(!login.equals(null))
         {
-        	boolean user=true;//check if user is log in or admin is log into
-        	if(user==false)
+        	//check if user is log in or admin is log into
+        	if(login.equals("user"))
         	{
         	    //user module	
         		do
@@ -132,7 +138,7 @@ public class OnlineBankingClient {
         	
         		}while(true);
         	}
-        	else
+        	else if(login.equals("admin"))
         	{
         		//admin module
         		do {
@@ -173,7 +179,7 @@ public class OnlineBankingClient {
         }
         else
         {
-        	System.out.println("ioInvalid credential...");
+        	System.out.println("Invalid credential...");
         }
 	}
 	
