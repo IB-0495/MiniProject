@@ -303,6 +303,24 @@ public class OnlineBankingDaoImpl implements IOnlineBankingDao {
 		
 		
 	}
-
+@Override
+	public String login(String userName, String password) throws OnlineBankingException {
+		con = DatabaseConnection.getConnection();
+		try {
+			ps=con.prepareStatement(QueryMapper.login);
+			ps.setString(1, userName);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{
+				return "user";
+			}
+		} 
+		
+		catch (SQLException e) {
+			logger.error(e.getMessage());
+			throw new OnlineBankingException("Technical Error refer log");
+		}
+		return null;
+	}
 
 }
